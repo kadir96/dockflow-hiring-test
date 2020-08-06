@@ -37,7 +37,7 @@ class ImportResult
     /**
      * Returns the imported tradeflows.
      *
-     * @return Tradeflow[]|array
+     * @return Tradeflow[]
      */
     public function getTradeflows(): array
     {
@@ -47,7 +47,7 @@ class ImportResult
     /**
      * Returns the invalid container references.
      *
-     * @return array|string[]
+     * @return string[]
      */
     public function getInvalidContainerReferences(): array
     {
@@ -57,7 +57,7 @@ class ImportResult
     /**
      * Return tradeflows without any container.
      *
-     * @return Tradeflow[]|array
+     * @return Tradeflow[]
      */
     public function getTradeflowsWithoutContainers(): array
     {
