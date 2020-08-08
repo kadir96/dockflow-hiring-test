@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImportRequest;
 use App\Http\Resources\ImportResultResource;
 use App\Import\Exceptions\ImportException;
 use App\Import\Importer;
-use Illuminate\Http\Request;
 
 class ImportController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(ImportRequest $request)
     {
         try {
             $importResult = Importer::forFile($request->file->path())->import();
