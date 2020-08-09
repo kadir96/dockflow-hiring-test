@@ -23,7 +23,7 @@ class ImportResult
     /**
      * Tradeflows with no container associated.
      *
-     * @var Tradeflow[]
+     * @var string[]
      */
     private array $tradeflowsWithoutContainers;
 
@@ -57,7 +57,7 @@ class ImportResult
     /**
      * Return tradeflows without any container.
      *
-     * @return Tradeflow[]
+     * @return string[]
      */
     public function getTradeflowsWithoutContainers(): array
     {
