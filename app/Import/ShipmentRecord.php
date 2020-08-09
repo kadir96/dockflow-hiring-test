@@ -7,9 +7,9 @@ class ShipmentRecord
     /**
      * The order no of the shipment.
      *
-     * @var string
+     * @var int
      */
-    private string $orderNo;
+    private int $orderNo;
 
     /**
      * The transporter of the shipment.
@@ -28,11 +28,11 @@ class ShipmentRecord
     /**
      * The purchase order no for this shipment.
      *
-     * @var string|null
+     * @var int|null
      */
-    private ?string $purchaseOrder;
+    private ?int $purchaseOrder;
 
-    public function __construct(string $orderNo, string $transporter, string $containerReference, ?string $purchaseOrder)
+    public function __construct(string $orderNo, string $transporter, string $containerReference, ?int $purchaseOrder = null)
     {
         $this->orderNo = $orderNo;
         $this->transporter = $transporter;
@@ -57,7 +57,7 @@ class ShipmentRecord
      */
     public function hasValidContainerRef(): bool
     {
-        return preg_match('/[A-Z]{4} \d{6}-\d/', $this->containerReference);
+        return preg_match('/^[A-Z]{4} \d{6}-\d$/', $this->containerReference);
     }
 
     /**
@@ -73,9 +73,9 @@ class ShipmentRecord
     /**
      * Returns the order no
      *
-     * @return string
+     * @return int
      */
-    public function getOrderNo(): string
+    public function getOrderNo(): int
     {
         return $this->orderNo;
     }
@@ -93,7 +93,7 @@ class ShipmentRecord
     /**
      * Returns the container reference.
      *
-     * @return string|null
+     * @return string
      */
     public function getContainerReference(): string
     {
@@ -103,9 +103,9 @@ class ShipmentRecord
     /**
      * Returns the purchase order no
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getPurchaseOrder(): ?string
+    public function getPurchaseOrder(): ?int
     {
         return $this->purchaseOrder;
     }
