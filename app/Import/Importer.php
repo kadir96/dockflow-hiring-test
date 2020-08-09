@@ -2,16 +2,24 @@
 
 namespace App\Import;
 
+use App\Import\Exceptions\FileNotFoundException;
 use App\Import\Exceptions\ImportException;
+use App\Import\Exceptions\ImportFailedException;
+use App\Import\Exceptions\UnsupportedFileTypeException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use App\Tradeflow as TradeflowModel;
 use App\Container as ContainerModel;
-use \Exception;
+use Throwable;
 
 class Importer
 {
+    const SUPPORTED_MIME_TYPES = [
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'application/vnd.ms-excel'
+    ];
+
     /**
      * The shipment records to be imported.
      *
@@ -29,9 +37,20 @@ class Importer
      *
      * @param string $path
      * @return static
+     * @throws FileNotFoundException|UnsupportedFileTypeException
      */
     public static function forFile(string $path): self
     {
+        if (!is_file($path)) {
+            throw new FileNotFoundException($path);
+        }
+
+        $mimeType = mime_content_type($path);
+
+        if (!in_array($mimeType, static::SUPPORTED_MIME_TYPES)) {
+            throw new UnsupportedFileTypeException($mimeType);
+        }
+
         $spreadsheet = IOFactory::load($path);
         $rows = $spreadsheet->getActiveSheet()->toArray();
 
@@ -73,10 +92,10 @@ class Importer
 
                 $persistedTradeflows->add($this->persistTradeflow($tradeflow));
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             DB::rollBack();
 
-            throw new ImportException($e);
+            throw new ImportFailedException($e);
         }
 
         DB::commit();
