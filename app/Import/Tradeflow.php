@@ -34,6 +34,10 @@ class Tradeflow
      */
     private array $shipmentRecordsWithInvalidContainerReference = [];
 
+    /**
+     * @param string $name
+     * @param ShipmentRecord[] $shipmentRecords
+     */
     public function __construct(string $name, array $shipmentRecords)
     {
         $this->name = $name;
@@ -72,7 +76,7 @@ class Tradeflow
     }
 
     /**
-     * Returns if tradeflow has importabled shipment records.
+     * Checks if tradeflow has importabled shipment records.
      *
      * @return bool
      */

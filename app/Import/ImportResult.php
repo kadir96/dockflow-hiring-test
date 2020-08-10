@@ -27,6 +27,11 @@ class ImportResult
      */
     private array $tradeflowsWithoutContainers;
 
+    /**
+     * @param Tradeflow[] $tradeflows
+     * @param string[] $invalidContainerReferences
+     * @param string[] $tradeflowsWithoutContainers
+     */
     public function __construct(array $tradeflows, array $invalidContainerReferences, array $tradeflowsWithoutContainers)
     {
         $this->tradeflows = $tradeflows;

@@ -32,6 +32,12 @@ class ShipmentRecord
      */
     private ?int $purchaseOrder;
 
+    /**
+     * @param string $orderNo
+     * @param string $transporter
+     * @param string $containerReference
+     * @param int|null $purchaseOrder
+     */
     public function __construct(string $orderNo, string $transporter, string $containerReference, ?int $purchaseOrder = null)
     {
         $this->orderNo = $orderNo;
@@ -41,7 +47,7 @@ class ShipmentRecord
     }
 
     /**
-     * Returns if this record is importable.
+     * Checks if this record is importable.
      *
      * @return bool
      */
@@ -51,7 +57,7 @@ class ShipmentRecord
     }
 
     /**
-     * Returns if container reference of this shipment is valid.
+     * Checks if container reference of this shipment is valid.
      *
      * @return bool
      */

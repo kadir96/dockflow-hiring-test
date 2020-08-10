@@ -27,6 +27,9 @@ class Importer
      */
     private Collection $records;
 
+    /**
+     * @param ShipmentRecord[] $records
+     */
     public function __construct(array $records)
     {
         $this->records = collect($records);
