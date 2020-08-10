@@ -14,6 +14,7 @@ class ImportController extends Controller
         try {
             $importResult = Importer::forFile($request->file->path())->import();
         } catch (ImportException $e) {
+            report($e);
             abort(500, 'Import failed!');
         }
 
