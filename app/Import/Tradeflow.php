@@ -2,8 +2,6 @@
 
 namespace App\Import;
 
-use Illuminate\Support\Collection;
-
 class Tradeflow
 {
     /**
