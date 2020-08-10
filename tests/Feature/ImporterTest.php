@@ -108,7 +108,7 @@ class ImporterTest extends TestCase
 
     public function test_import_from_path_successfully()
     {
-        $importer = Importer::forFile($this->getStubPath('completely-valid.xlsx'));
+        $importer = Importer::forFile($this->getStubPath('3valid.xlsx'));
 
         $importer->import();
 
