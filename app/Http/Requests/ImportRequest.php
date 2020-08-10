@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Import\Importer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImportRequest extends FormRequest
@@ -24,7 +25,11 @@ class ImportRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|file',
+            'file' => [
+                'required',
+                'file',
+                'mimetypes:' . implode(',', Importer::SUPPORTED_MIME_TYPES),
+            ]
         ];
     }
 }
